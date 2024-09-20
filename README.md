@@ -161,7 +161,7 @@ GoogleProvider({
 }),
 ```
 
-For more information on adding and configuring providers, refer to the [NextAuth.js documentation on providers](https://next-auth.js.org/configuration/providers/oauth).
+For more information on adding and configuring providers, refer to the [NextAuth.js documentation on providers](https://next-auth.js.org/providers/).
 
 ### NextAuth.js Secret
 
