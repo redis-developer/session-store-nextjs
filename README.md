@@ -39,7 +39,7 @@ Follow these steps to deploy your application with Redis Cloud on Vercel:
 
 4. Wait for the deployment to complete.
 
-![Add Redis Cloud store](./images/vercel-step-6.png?raw=true)
+![Add Redis Cloud store](./images/vercel-step-3.png?raw=true)
 
 5. Once deployed, use the URL of your deployed app to set up the authentication providers. See the [Configuration](#️-configuration) section below for detailed instructions for setting these up. By default, the template is configured to use GitHub and Discord. Only one provider is required.
 
