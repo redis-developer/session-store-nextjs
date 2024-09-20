@@ -81,6 +81,9 @@ export default function Home() {
                     <code>openssl rand -base64 32</code>
                   </pre>
                 </p>
+                <p className="mt-4 text-sm text-yellow-600">
+                  Note: You may need to redeploy your app after setting environment variables.
+                </p>
               </div>
             ) : providers.length === 0 ? (
               <div className="mb-4 text-left">
@@ -103,6 +106,9 @@ export default function Home() {
                   >
                     See docs for details on setting up providers
                   </a>
+                </p>
+                <p className="mt-4 text-sm text-yellow-600">
+                  Note: You may need to redeploy your app after setting environment variables.
                 </p>
               </div>
             ) : (
