@@ -6,6 +6,12 @@
 
 This [Next.js](https://nextjs.org/) project demonstrates how to use **Redis as a session store** for authentication. The application supports multiple authentication providers, offering a scalable and performant solution for your web applications.
 
+## Deploy with Redis Cloud on Vercel
+
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fredis-developer%2Fsession-store-nextjs&project-name=redis-session-store-nextjs&stores=%5B%7B%22type%22%3A%22integration%22%2C%22integrationSlug%22%3A%22redis%22%2C%22productSlug%22%3A%22redis%22%7D%5D">
+  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
+</a>
+
 ## ✨ Features
 
 - 🗄️ **Redis Session Store**: Utilizes Redis for storing session data
@@ -16,6 +22,7 @@ This [Next.js](https://nextjs.org/) project demonstrates how to use **Redis as a
 ## 🚀 Getting Started
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    # or
@@ -25,6 +32,7 @@ This [Next.js](https://nextjs.org/) project demonstrates how to use **Redis as a
    ```
 
 2. **Run the development server:**
+
    ```bash
    npm run dev
    # or
