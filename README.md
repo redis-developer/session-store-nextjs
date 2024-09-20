@@ -113,8 +113,8 @@ DISCORD_CLIENT_SECRET=your_discord_client_secret
 2. Click on "New OAuth App"
 3. Fill in the application details:
    - Application name: Your app name
-   - Homepage URL: https://your-vercel-app-url.vercel.app
-   - Authorization callback URL: https://your-vercel-app-url.vercel.app/api/auth/callback/github
+   - Homepage URL: https://your-vercel-app-url.vercel.app 
+   - Authorization callback URL: https://your-vercel-app-url.vercel.app/api/auth/callback/github (or your local URL if you're running it locally)
 4. Click "Register application"
 5. Copy the Client ID and generate a new Client Secret
 6. Add these to your Vercel project's environment variables as `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`
@@ -131,7 +131,7 @@ GITHUB_CLIENT_SECRET=1234567890abcdef1234567890abcdef12345678
 2. Click on "New Application"
 3. Give your application a name and create it
 4. Go to the "OAuth2" tab in the left sidebar
-5. Add a redirect URL: https://your-vercel-app-url.vercel.app/api/auth/callback/discord
+5. Add a redirect URL: https://your-vercel-app-url.vercel.app/api/auth/callback/discord (or your local URL if you're running it locally)
 6. Copy the Client ID and Client Secret
 7. Add these to your Vercel project's environment variables as `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET`
 
