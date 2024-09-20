@@ -1,17 +1,18 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import { useNextAuthConfig } from "@/hooks/useNextAuthConfig";
+import { useAuthProviders } from "@/hooks/useAuthProviders";
 
 export default function Home() {
   useAuthRedirect("/dashboard", true);
   const { status } = useSession();
-  const [providers, setProviders] = useState([]);
+  const { nextAuthSecret, isLoading: isLoadingSecret } = useNextAuthConfig();
+  const { providers, isLoading: isLoadingProviders } = useAuthProviders();
 
   const providerIcons = {
     github: (
@@ -25,16 +26,6 @@ export default function Home() {
       </svg>
     ),
   };
-
-  // Load authentication providers
-  useEffect(() => {
-    const loadProviders = async () => {
-      const res = await fetch("/api/auth/providers");
-      const providersData = await res.json();
-      setProviders(Object.values(providersData));
-    };
-    loadProviders();
-  }, []);
 
   // Render provider login buttons
   const renderProviderButton = (provider) => {
@@ -51,8 +42,8 @@ export default function Home() {
     );
   };
 
-  // Show loading indicator while checking authentication status
-  if (status === "loading") {
+  // Show loading indicator while checking authentication status or loading config
+  if (status === "loading" || isLoadingSecret || isLoadingProviders) {
     return <LoadingSpinner />;
   }
 
@@ -61,20 +52,37 @@ export default function Home() {
     return null;
   }
 
-  // Render login buttons when unauthenticated
+  // Render configuration warnings or login buttons
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-          {providers.length > 0 ? "Login" : "No providers configured"}
+            {!nextAuthSecret ? "NEXTAUTH_SECRET not configured" : 
+             providers.length === 0 ? "No providers configured" : "Login"}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center">
-            {providers.length > 0 ? (
-              providers.map(renderProviderButton)
-            ) : (
+            {!nextAuthSecret ? (
+              <div className="mb-4 text-left">
+                <p className="mt-2">
+                  Set <code className="bg-gray-200 p-1 rounded">NEXTAUTH_SECRET</code> in your <code className="bg-gray-200 p-1 rounded">.env</code> file.
+                </p>
+                <p className="mt-4 text-sm">For example:</p>
+                <pre className="bg-gray-100 p-2 mt-2 rounded text-sm overflow-x-auto whitespace-pre-wrap">
+                  <code className="block">
+                    NEXTAUTH_SECRET=your_generated_secret
+                  </code>
+                </pre>
+                <p className="mt-4 text-sm">
+                  Generate a secure secret using:
+                  <pre className="bg-gray-100 p-2 mt-2 rounded text-sm overflow-x-auto">
+                    <code>openssl rand -base64 32</code>
+                  </pre>
+                </p>
+              </div>
+            ) : providers.length === 0 ? (
               <div className="mb-4 text-left">
                 <p className="mt-2">
                   Configure authentication providers by setting <code className="bg-gray-200 p-1 rounded">CLIENT_SECRET</code> and <code className="bg-gray-200 p-1 rounded">CLIENT_ID</code> in your <code className="bg-gray-200 p-1 rounded">.env</code> file. 
@@ -97,6 +105,8 @@ export default function Home() {
                   </a>
                 </p>
               </div>
+            ) : (
+              providers.map(renderProviderButton)
             )}
           </div>
         </CardContent>
