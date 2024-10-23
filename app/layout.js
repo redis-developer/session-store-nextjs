@@ -1,6 +1,7 @@
 import { GeistMono } from 'geist/font/mono';
 import "./globals.css";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 export const metadata = {
   title: "Redis Session Store Template",
@@ -8,6 +9,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+
   return (
     <html
       lang="en"
@@ -36,6 +39,7 @@ export default function RootLayout({ children }) {
             />
           </svg>
         </a>
+        {gtmId && <GoogleTagManager gtmId={gtmId} />}
       </body>
     </html>
   );
